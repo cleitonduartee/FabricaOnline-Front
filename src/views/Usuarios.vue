@@ -42,7 +42,7 @@
       </v-container>
       <v-card-actions>
         <v-row justify="center">
-          <v-btn color="success" @click="atualizar" class="mx-1 " v-if="itemEdicao != null">Atualizar</v-btn>
+          <v-btn color="success" @click="atualizar" class="mx-1 " v-if="itemEdicao">Atualizar</v-btn>
           <v-btn color="success" @click="salvar" class="mx-1" v-else>Salvar</v-btn>
           <v-btn color="warning" @click="cancelar" class="mx-1">Cancelar</v-btn>
         </v-row>
@@ -66,7 +66,7 @@
         >{{ item.ativo ? " mdi-check-bold": " mdi-cancel"}}</v-icon>
       </template>
       <template v-slot:no-data>
-        <v-subheader>Nenhum usuário cadastrado</v-subheader>
+        <v-subheader >Nenhum usuário cadastrado</v-subheader>
       </template>
     </v-data-table>
   </div>
@@ -76,7 +76,7 @@
 export default {
   data: () => ({
     mostrarForm:false,
-    itemEdicao: null,
+    itemEdicao: false,
     usuarios: [],
     usuarioAtual: {},
     geradorDeID: 3,
@@ -106,7 +106,7 @@ export default {
 
   computed: {
     formTitulo() {
-      return this.itemEdicao === null ? "Novo Usuário" : "Editar Usuário";
+      return this.itemEdicao ? "Editar Usuário":"Novo Usuário";
     }
   },
 
@@ -179,7 +179,7 @@ export default {
     },
     cancelar(){
       this.usuarioAtual = {},
-      this.itemEdicao = null,
+      this.itemEdicao = false,
       this.mostrarForm = false
     }
   }
